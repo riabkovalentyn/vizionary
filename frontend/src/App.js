@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import DataUpload from './components/DataUpload';
+import DataVisualization from './components/DataVisualization';
 
-function App() {
+const App = () => {
+  const dummyData = [
+    { date: '2021-01-01', value: 100 },
+    { date: '2021-01-02', value: 150 },
+    { date: '2021-01-03', value: 200 },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>DataScope</h1>
+      <DataUpload />
+      <DataVisualization data={dummyData} />
     </div>
   );
-}
+};
 
 export default App;
