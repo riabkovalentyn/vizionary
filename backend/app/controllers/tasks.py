@@ -20,17 +20,22 @@ def create_tasks(task: Task):
 def get_task():
     return tasks
 
-@router.put("/tasks/{task_id}", response_model = Task)
-
-def update_task(task_id: int, updated_task: Task):
+@router.get("/tasks/{task_id}", response_model = Task)
+def get_task(task_id: int):
     for task in tasks:
-        if task.id == task.id:
+        if task.id == task_id:
+            return task
+    
+    raise HTTPException(status_code=404,  detail="Task not found")
+
+@router.put("/tasks/{task_id}", response_model = Task)
+def update_task(task_id: int, updated_task: Task):
+    for task in tasks: 
+        if task.id == task_id: 
             task.title = updated_task.title
             task.completed = updated_task.completed
             return task
-        
-    raise HTTPException(status_code=404,  detail="Task not found")    
-
+    raise HTTPException(status_code=404, detail="Task not found")
 
 @router.delete("/tasks/{task_id}")
 def delete_task(task_id: int):
