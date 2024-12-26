@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { createTask } from '../api/tasks';
 
 const DataUpload = () => {
     const [file, setFile] = useState(null);
@@ -15,6 +16,10 @@ const handleUpload = () => {
     axios.post('http://localhost:8000/upload', formData)
     .then((response) => {
         console.log(response);
+        const newTask = { id: response.data.id, title: 'New Task', completed: false };
+        createTask(newTask).then((task)=> {
+            console.log('Task created:', task);
+        });
     })
     .catch((error) => {
         setError(error.message);
