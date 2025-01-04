@@ -70,28 +70,31 @@ const TaskList = () => {
          fullWidth
          margin="normal"
       />
-      <Button onClick={handleCreateTask}>Add Task</Button>
-      <ul>
+      <Button variant="contained" color="primary" onClick={handleCreateTask} disabled={loading}>
+        Add Task
+      </Button>
+      {loading && <CircularProgress />}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <List>
         {tasks.map((task) => (
-          <li key={task.id}>
-            <input
-              type="text"
+          <ListItem key={task.id}>
+            <TextField
               value={task.title}
-              onChange={(e) =>
-                handleUpdateTask(task.id, { ...task, title: e.target.value })
-              }
+              onChange={(e) => handleUpdateTask(task.id, { ...task, title: e.target.value })}
+              variant="outlined"
+              fullWidth
+              margin="normal"
             />
-            <input
-              type="checkbox"
+            <Checkbox
               checked={task.completed}
-              onChange={(e) =>
-                handleUpdateTask(task.id, { ...task, completed: e.target.checked })
-              }
+              onChange={(e) => handleUpdateTask(task.id, { ...task, completed: e.target.checked })}
             />
-            <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
-          </li>
+            <Button variant="contained" color="secondary" onClick={() => handleDeleteTask(task.id)} disabled={loading}>
+              Delete
+            </Button>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };
