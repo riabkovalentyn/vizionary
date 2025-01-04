@@ -1,6 +1,6 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
 router = APIRouter()
 
@@ -17,8 +17,19 @@ def create_tasks(task: Task):
     return task
 
 @router.get("/tasks/", response_model = List[Task])
-def get_task():
-    return tasks
+def get_task(
+    completed: Optional[bool] = None,
+    sort_by: Optional[str] = Query(None, regex="^(title| completed)$^"),
+    skip: int = 0,
+    limit: int = 10,
+):
+    filtered_tasks = tasks
+    if completed is not None:
+        filtered_tasks = [task for task in tasks if task.completed == completed]
+
+    if sort_by:
+        filtered_tasks = sorted(filtered_tasks, key=lambda x: getattr(x, sort_by))
+    return filtered_tasks[skip : skip + limit]
 
 @router.get("/tasks/{task_id}", response_model = Task)
 def get_task(task_id: int):
