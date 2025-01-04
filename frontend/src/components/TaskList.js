@@ -37,25 +37,38 @@ const TaskList = () => {
   };
 
   const handleUpdateTask = (taskId, updatedTask) => {
-    updateTask(taskId, updatedTask).then((updated) => {
-      setTasks(tasks.map((task) => (task.id === taskId ? updated : task)));
-    });
+    setLoading(true)
+    updateTask(taskId, updatedTask)
+      .then((updated) => {
+        setTasks(tasks.map((task) => (task.id === taskId ? updated : task)));
+        enqueueSnackbar('Task updated successfully', { variant: 'success' });
+        })
+      .catch((error) => setError(error.message))
+      .finally(()=> setLoading(false));
+
   };
 
   const handleDeleteTask = (taskId) => {
-    deleteTask(taskId).then(() => {
+    setLoading(true);
+    deleteTask(taskId)
+    .then(() => {
       setTasks(tasks.filter((task) => task.id !== taskId));
-    });
+      enqueueSnackbar('Task deleted successfully', { variant: 'success' });
+    })
+    .catch((error) => setError(error.message))
+    .finally(() => setLoading(false));
   };
 
   return (
     <div>
       <h1>Task List</h1>
-      <input
-        type="text"
-        value={newTaskTitle}
-        onChange={(e) => setNewTaskTitle(e.target.value)}
-        placeholder="New task title"
+      <TextField
+         label="New Task Title"
+         value={newTaskTitle}
+         onChange={(e) => setNewTaskTitle(e.target.value)}
+         variant="outlined"
+         fullWidth
+         margin="normal"
       />
       <button onClick={handleCreateTask}>Add Task</button>
       <ul>
