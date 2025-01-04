@@ -70,7 +70,7 @@ const TaskList = () => {
          fullWidth
          margin="normal"
       />
-      <button onClick={handleCreateTask}>Add Task</button>
+      <Button onClick={handleCreateTask}>Add Task</Button>
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
