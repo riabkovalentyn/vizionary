@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { fetchTasks, createTask, updateTask, deleteTask } from '../api/tasks';
+import { TextField, Button, Checkbox, List, ListItem, ListItemText, CircularProgress} from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    fetchTasks().then(setTasks);
+    setLoading(true);
+    fetchTasks()
+      .then(setTasks)
+      .catch((error) => setError(error.message))
+      .finally(() => setLoading(false));
+    
   }, []);
 
   const handleCreateTask = (newTask) => {
