@@ -19,10 +19,21 @@ const TaskList = () => {
     
   }, []);
 
-  const handleCreateTask = (newTask) => {
-    createTask(newTask).then((createdTask) => {
-      setTasks([...tasks, createdTask]);
-    });
+  const handleCreateTask = () => {
+    if (!newTaskTitle.trim()){
+      enqueueSnackbar('Task title cannot be empty', { variant: 'error' });
+      return
+    }
+    const newTask = {id: Date.now(), title: newTaskTitle, completed: false};
+    setLoading(true);
+    createTask(newTask)
+      .then((createTask)=> {
+        setTasks([...tasks, createTask]);
+        setNewTaskTitle('');
+        enqueueSnackbar('Task created successfully', { variant: 'success' });
+      })
+      .catch((error) => setError(error.message))
+      .finally(() => setLoading(false));
   };
 
   const handleUpdateTask = (taskId, updatedTask) => {
