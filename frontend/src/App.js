@@ -1,8 +1,12 @@
 import React from 'react';
-import DataUpload from './components/DataUpload';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import DataVisualization from './components/DataVisualization';
+import WelcomePage from './components/WelcomePage';
+import { SnackbarProvider } from 'notistack';
+
 
 const App = () => {
+  
   const dummyData = [
     { date: '2021-01-01', value: 100 },
     { date: '2021-01-02', value: 150 },
@@ -10,11 +14,16 @@ const App = () => {
   ];
 
   return (
-    <div>
-      <h1>DataScope</h1>
-      <DataUpload />
-      <DataVisualization data={dummyData} />
-    </div>
+    <SnackbarProvider maxSnack={3}>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={WelcomePage} />
+          <Route path="/data-visualization">
+            <DataVisualization />
+          </Route>
+        </Switch>
+      </Router>
+    </SnackbarProvider>
   );
 };
 
