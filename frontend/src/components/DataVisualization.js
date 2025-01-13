@@ -30,10 +30,13 @@ const DataVisaulization = ({ data }) => {
         },
     }    
     return(
-        <div>
-      <h2>Data Visualization</h2>
-      <Bar data={chartData} options={options} />
-        </div>
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-cyberpunk-light text-black">
+        <div className="absolute inset-0 bg-cyberpunk-gradient opacity-50 animate-background-pan"></div>
+        <h2 className= "text-4xl font-bold mb-4 animate-neon-glow z-10">Data Visualization</h2>
+        <div className="w-full max-w-4xl z-10">
+        <Bar data={chartData} options={options} />
+        </div>   
+    </div>
     );
 };
 

@@ -1,27 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import DataVisualization from './components/DataVisualization';
+import { BrowserRouter as Router, Route, Switch, Routes } from 'react-router-dom';
 import WelcomePage from './components/WelcomePage';
 import { SnackbarProvider } from 'notistack';
+import sampleData from './sampleData';
+import DataVisaulization from './components/DataVisualization';
 
 
 const App = () => {
-  
-  const dummyData = [
-    { date: '2021-01-01', value: 100 },
-    { date: '2021-01-02', value: 150 },
-    { date: '2021-01-03', value: 200 },
-  ];
-
   return (
     <SnackbarProvider maxSnack={3}>
       <Router>
-        <Switch>
-          <Route exact path="/" component={WelcomePage} />
-          <Route path="/data-visualization">
-            <DataVisualization />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route  path="/" element={<WelcomePage/>} />
+          <Route path="/data-visualization" element={<DataVisaulization data={sampleData}/>} />
+        </Routes>
       </Router>
     </SnackbarProvider>
   );
