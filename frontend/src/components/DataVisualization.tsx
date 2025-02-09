@@ -4,7 +4,16 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const DataVisaulization = ({ data }) => {
+interface DataItemProps {
+    date: string;
+    value: number;
+}
+
+interface DataVisaulizationProps {
+    data: DataItemProps[];
+}
+
+const DataVisaulization: React.FC<DataVisaulizationProps> = ({ data }) => {
     const chartData = {
         labels: data.map(item => item.date),
         datasets: [{
@@ -21,7 +30,7 @@ const DataVisaulization = ({ data }) => {
         responsive: true,
         plugins: {
             legend:{
-                position: 'top',
+                position: 'top' as const,
             },
             title: {
                 display: true,

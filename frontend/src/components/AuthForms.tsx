@@ -1,6 +1,11 @@
-import React, { useState } from 'react';   
+import React, { useState } from 'react';  
 
-const AuthForms = ({ isLogin, toggleForm }) => {
+interface AuthFormsProps {
+    isLogin: boolean;
+    toggleForm: () => void;
+}
+
+const AuthForms: React.FC<AuthFormsProps> = ({ isLogin, toggleForm }) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -9,14 +14,14 @@ const AuthForms = ({ isLogin, toggleForm }) => {
         confirmPassword: '',
         agreeToTerms: false,
     });
-    const  handleChange = (e) =>{
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name,value,type,checked} = e.target;
         setFormData({
             ...formData,
             [name]: type === 'checkbox' ? checked : value,
         });
     };
-    const hendleSubmit = (e) =>{
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
 
     };

@@ -1,7 +1,13 @@
 import React from 'react';
 import { Switch } from '@headlessui/react';
 
-const Header = ({ darkMode, setDarkMode, openModal }) => {
+interface HeaderProps {
+  darkMode: boolean;
+  setDarkMode: (value: boolean) => void;
+  openModal: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode, openModal }) => {
   return (
     <header className="flex justify-end items-center p-4 bg-cyberpunk-dark text-white">
       <div className="flex items-center space-x-4">

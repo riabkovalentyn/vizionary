@@ -1,16 +1,22 @@
 import React, { Component } from "react";
 import { getDatasetAtEvent } from "react-chartjs-2";
 
-class ErrorBoundary extends Component {
-    constructor(props){
+interface ErrorBoundatyProps{
+    children: React.ReactNode;
+    }
+interface ErrorBoundatyState{
+    hasError: boolean;
+}
+class ErrorBoundary extends Component<ErrorBoundatyProps, ErrorBoundatyState> {
+    constructor(props: ErrorBoundatyProps){
         super(props)
         this.state = {hasError: false};
     }
-    static getDerivedStateFromError(error){
+    static getDerivedStateFromError(error: Error): ErrorBoundatyState{
         return {hasError: true};
     }
 
-    componentDidCatch(error, info){
+    componentDidCatch(error: Error, info: React.ErrorInfo): void{
         console.error('ErrorBoundary caught an error:', error, info);
     }
     render(){

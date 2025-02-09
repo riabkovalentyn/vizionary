@@ -1,6 +1,12 @@
 import React from 'react';
 
-const Modal = ({ isOpen, closeModal, children })=> {
+interface ModalProps {
+    isOpen: boolean;
+    closeModal: () => void;
+    children: React.ReactNode;
+}
+
+const Modal: React.FC<ModalProps> = ({ isOpen, closeModal, children })=> {
     if(!isOpen) return null;
 
     return (

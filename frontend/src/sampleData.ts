@@ -1,4 +1,10 @@
-const sampleData = [
+interface SampleData{
+  date: string;
+  value: number;
+}
+
+
+const SampleData = [
     { date: 'January', value: 65 },
     { date: 'February', value: 59 },
     { date: 'March', value: 80 },
@@ -8,4 +14,4 @@ const sampleData = [
     { date: 'July', value: 40 },
   ];
   
-  export default sampleData;
+  export default SampleData;
