@@ -1,7 +1,4 @@
 import axios from 'axios';
-// import process from 'process';
-
-
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -28,6 +25,5 @@ export const updateTask = async (taskId: number, updatedTask: Partial<Task>) => 
 };
 
 export const deleteTask = async (taskId:number): Promise<void> => {
-  const response = await axios.delete(`${API_URL}/api/v1/tasks/${taskId}`);
-  return response.data;
+ await axios.delete(`${API_URL}/api/v1/tasks/${taskId}`);
 };

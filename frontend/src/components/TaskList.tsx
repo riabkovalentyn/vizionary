@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchTasks, createTask, updateTask, deleteTask } from '../api/tasks';
-import { TextField, Button, Checkbox, List, ListItem, ListItemText, CircularProgress } from '@material-ui/core';
+import { TextField, Button, Checkbox, List, ListItem, ListItemText, CircularProgress } from '@mui/material';
 import { useSnackbar } from 'notistack';
 
 interface Task {
