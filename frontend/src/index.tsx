@@ -6,11 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import { SnackbarProvider } from 'notistack';
 
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(
+ReactDOM.render(
   <SnackbarProvider maxSnack={3}>
     <App />
-  </SnackbarProvider>
+  </SnackbarProvider>,
+  document.getElementById('root')
 );
 
 
